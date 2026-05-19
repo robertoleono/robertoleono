@@ -11,21 +11,18 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
 /* ── RESET ──────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --black:     #060606;
   --off-black: #0d0d0d;
   --dark:      #111;
   --red:       #E8341A;
   --white:     #EDEAE4;
-  --muted:     #666;
+  --muted:     #999;
   --gap:       3px;
 }
-
 html { scroll-behavior: smooth; }
 body {
   background: var(--black);
@@ -37,7 +34,6 @@ body {
 }
 a { text-decoration: none; color: inherit; }
 img { display: block; }
-
 /* ── NAV ────────────────────────────────────── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -60,17 +56,16 @@ nav.scrolled {
 .nav-logo span { color: var(--red); }
 .nav-right { display: flex; align-items: center; gap: 36px; }
 .nav-link {
-  font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--muted); transition: color 0.2s;
 }
 .nav-link:hover { color: var(--white); }
 .nav-cta {
-  font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--white); background: var(--red);
   padding: 10px 22px; transition: background 0.2s;
 }
 .nav-cta:hover { background: #c42c14; }
-
 /* ── HERO ───────────────────────────────────── */
 .hero {
   position: relative; height: 100vh;
@@ -85,9 +80,9 @@ nav.scrolled {
 }
 .hero-bg::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(160deg,
-    rgba(6,6,6,0.45) 0%, rgba(6,6,6,0.1) 45%,
-    rgba(6,6,6,0.65) 78%, rgba(6,6,6,1) 100%);
+  background:
+    linear-gradient(to bottom, rgba(6,6,6,0.55) 0%, rgba(6,6,6,0.2) 40%, rgba(6,6,6,0.55) 70%, rgba(6,6,6,1) 100%),
+    linear-gradient(to right, rgba(6,6,6,0.5) 0%, rgba(6,6,6,0) 60%);
 }
 @keyframes bgZoom {
   from { transform: scale(1.06); }
@@ -99,10 +94,12 @@ nav.scrolled {
   display: flex; flex-direction: column; align-items: flex-start;
 }
 .hero-tag {
-  font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--red); margin-bottom: 18px;
+  font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 18px;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.9);
   opacity: 0; animation: up 0.7s 0.3s ease forwards;
 }
+.hero-tag .red-dot { color: var(--red); }
 .hero-name {
   font-family: 'Big Shoulders Display', sans-serif;
   font-weight: 900; font-size: clamp(4.8rem, 13vw, 12rem);
@@ -118,13 +115,14 @@ nav.scrolled {
   opacity: 0; animation: up 0.7s 0.75s ease forwards;
 }
 .hero-credits {
-  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(237,234,228,0.38); line-height: 2.1;
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--white); line-height: 2.1;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.9);
 }
-.hero-credits strong { color: rgba(237,234,228,0.6); font-weight: 400; }
+.hero-credits strong { color: var(--white); font-weight: 500; }
 .hero-cta {
   display: inline-flex; align-items: center; gap: 14px;
-  font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--white); background: var(--red); border: none; cursor: pointer;
   padding: 17px 34px; transition: background 0.2s, gap 0.2s; white-space: nowrap;
 }
@@ -133,22 +131,14 @@ nav.scrolled {
   from { opacity: 0; transform: translateY(30px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 /* ── REEL SECTION ───────────────────────────── */
-/*
-  El Error 153 significa que el video tiene "Permitir inserción"
-  DESACTIVADO en YouTube Studio. No es un bug de código.
-  Fix permanente: YouTube Studio → Videos → "Reel tv" → Editar
-  → Más opciones → activar "Permitir inserción" → Guardar.
-  Mientras tanto, el reel muestra thumbnail clicable que abre YouTube.
-*/
 .reel-section { background: var(--black); padding: 0 0 96px; }
 .reel-header {
   display: flex; align-items: flex-end; justify-content: space-between;
   padding: 76px 60px 36px;
 }
 .section-label {
-  font-size: 0.58rem; letter-spacing: 0.26em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--red); display: flex; align-items: center; gap: 12px;
 }
 .section-label::before { content: ''; width: 26px; height: 1px; background: var(--red); }
@@ -160,7 +150,6 @@ nav.scrolled {
 .section-h .outline {
   -webkit-text-stroke: 1.5px rgba(237,234,228,0.17); color: transparent;
 }
-/* Thumbnail clicable — sin iframe, sin Error 153 */
 .reel-thumb {
   position: relative; width: 100%; aspect-ratio: 16/9;
   overflow: hidden; background: #080808;
@@ -186,24 +175,23 @@ nav.scrolled {
 }
 .reel-thumb:hover .reel-play-btn { transform: scale(1.1); background: #c42c14; }
 .reel-play-label {
-  font-size: 0.58rem; letter-spacing: 0.26em; text-transform: uppercase;
-  color: rgba(237,234,228,0.7);
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(237,234,228,0.82);
 }
 .reel-foot {
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 60px 0;
 }
 .reel-meta {
-  font-size: 0.58rem; letter-spacing: 0.17em; text-transform: uppercase; color: var(--muted);
+  font-size: 0.72rem; letter-spacing: 0.17em; text-transform: uppercase; color: var(--muted);
 }
 .reel-meta span { color: rgba(237,234,228,0.4); margin: 0 10px; }
 .reel-ext {
-  font-size: 0.58rem; letter-spacing: 0.17em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.17em; text-transform: uppercase;
   color: var(--muted); border-bottom: 1px solid rgba(102,102,102,0.35);
   padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
 }
 .reel-ext:hover { color: var(--white); border-color: var(--white); }
-
 /* ── SHARED SECTION WRAPPER ─────────────────── */
 .section {
   padding: 96px 60px;
@@ -212,7 +200,6 @@ nav.scrolled {
 .section.alt { background: var(--off-black); }
 .section.dark { background: var(--black); }
 .section-top { margin-bottom: 52px; }
-
 /* ── TV POSTERS — 4 cols, 2:3 ──────────────── */
 .posters-row {
   display: grid;
@@ -222,7 +209,7 @@ nav.scrolled {
 }
 .poster-card {
   position: relative;
-  aspect-ratio: 2 / 3;          /* igual que el original */
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background: var(--dark);
 }
@@ -242,16 +229,14 @@ nav.scrolled {
 }
 .poster-card:hover .poster-info { opacity: 1; transform: translateY(0); }
 .poster-show {
-  font-size: 0.56rem; letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.13em; text-transform: uppercase;
   color: var(--white);
 }
 .poster-network {
-  font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 0.68rem; letter-spacing: 0.11em; text-transform: uppercase;
   color: var(--red); margin-top: 4px;
 }
-
 /* ── TV THUMBNAILS — 3 cols, 16:9 ──────────── */
-/* Original era repeat(3,1fr). Lo mantengo. */
 .channels-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -259,7 +244,7 @@ nav.scrolled {
 }
 .channel-card {
   position: relative;
-  aspect-ratio: 16 / 9;         /* igual que el original */
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--dark);
 }
@@ -279,12 +264,11 @@ nav.scrolled {
 }
 .channel-card:hover .channel-info { opacity: 1; transform: translateY(0); }
 .channel-show {
-  font-size: 0.54rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white);
+  font-size: 0.72rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--white);
 }
 .channel-net {
-  font-size: 0.48rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--red); margin-top: 3px;
+  font-size: 0.68rem; letter-spacing: 0.10em; text-transform: uppercase; color: var(--red); margin-top: 3px;
 }
-
 /* ── VIDEO GRID — 3 cols, 16:9 ─────────────── */
 .video-grid {
   display: grid;
@@ -311,7 +295,7 @@ nav.scrolled {
   padding: 20px 22px;
 }
 .video-type {
-  font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red);
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red);
 }
 .video-info { display: flex; align-items: flex-end; justify-content: space-between; }
 .video-title {
@@ -320,8 +304,8 @@ nav.scrolled {
   text-transform: uppercase; line-height: 1; color: var(--white);
 }
 .video-client {
-  font-size: 0.48rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(237,234,228,0.38); text-align: right;
+  font-size: 0.68rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: rgba(237,234,228,0.6); text-align: right;
 }
 .video-play {
   position: absolute; top: 50%; left: 50%;
@@ -333,7 +317,6 @@ nav.scrolled {
 }
 .video-card:hover .video-play { opacity: 1; transform: translate(-50%,-50%) scale(1); }
 .play-svg { margin-left: 3px; }
-
 /* ── ABOUT ──────────────────────────────────── */
 .about-grid {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -371,17 +354,16 @@ nav.scrolled {
   font-weight: 900; font-size: 2.8rem; color: var(--red); line-height: 1;
 }
 .stat-l {
-  font-size: 0.52rem; letter-spacing: 0.17em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--muted); margin-top: 5px;
 }
 .btn-cv {
   display: inline-flex; align-items: center; gap: 12px;
-  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--white); border: 1px solid rgba(237,234,228,0.15);
   padding: 13px 26px; transition: border-color 0.2s, gap 0.2s;
 }
 .btn-cv:hover { border-color: rgba(237,234,228,0.48); gap: 18px; }
-
 /* ── CONTACT ─────────────────────────────────── */
 .contact-grid {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -406,7 +388,7 @@ nav.scrolled {
 }
 .contact-row:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
 .contact-row:hover { border-bottom-color: rgba(255,255,255,0.11); }
-.c-label { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.c-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
 .c-val { font-size: 0.88rem; color: var(--white); transition: color 0.2s; }
 .c-val a { color: var(--white); }
 .c-val a:hover { color: var(--red); }
@@ -418,7 +400,7 @@ nav.scrolled {
 }
 .field { margin-bottom: 28px; }
 .field label {
-  display: block; font-size: 0.52rem; letter-spacing: 0.2em;
+  display: block; font-size: 0.72rem; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
 }
 .field input, .field textarea {
@@ -432,12 +414,11 @@ nav.scrolled {
 .field textarea { resize: none; height: 86px; }
 .btn-send {
   width: 100%; background: var(--red); color: var(--white); border: none;
-  padding: 17px; font-family: 'Inter', sans-serif; font-size: 0.62rem;
+  padding: 17px; font-family: 'Inter', sans-serif; font-size: 0.72rem;
   letter-spacing: 0.24em; text-transform: uppercase;
   cursor: pointer; transition: background 0.2s; margin-top: 6px;
 }
 .btn-send:hover { background: #c42c14; }
-
 /* ── FOOTER ─────────────────────────────────── */
 footer {
   background: var(--off-black); padding: 30px 60px;
@@ -450,18 +431,16 @@ footer {
   letter-spacing: 0.12em; text-transform: uppercase;
 }
 .footer-logo span { color: var(--red); }
-footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+footer p { font-size: 0.70rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .footer-ig {
   display: flex; align-items: center; gap: 9px;
-  font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 0.70rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--muted); transition: color 0.2s;
 }
 .footer-ig:hover { color: var(--white); }
-
 /* ── REVEAL ─────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(38px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
 /* ── RESPONSIVE ─────────────────────────────── */
 @media (max-width: 960px) {
   nav, nav.scrolled { padding: 18px 22px; }
@@ -481,14 +460,12 @@ footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase
   .video-grid { grid-template-columns: 1fr; }
   .channels-row { grid-template-columns: 1fr; }
 }
-
 ::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb { background: #252525; }
 </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">RL<span>.</span></a>
@@ -499,10 +476,7 @@ footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase
     <a href="#contact" class="nav-cta">Contacto</a>
   </div>
 </nav>
-
-<!-- ═══════════════════════════════════════
-     HERO
-════════════════════════════════════════ -->
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -517,23 +491,12 @@ footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase
     </div>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════
-     REEL TV
-     Thumbnail clicable → abre YouTube.
-     Para activar embed directo en la web:
-     YouTube Studio → Videos → "Reel tv" → Editar
-     → Más opciones → activar "Permitir inserción"
-     Luego reemplaza el <a class="reel-thumb"> por
-     el iframe comentado debajo.
-════════════════════════════════════════ -->
+<!-- REEL TV -->
 <section class="reel-section">
   <div class="reel-header reveal">
     <div class="section-label">Reel TV</div>
     <h2 class="section-h">El trabajo<br><span class="outline">en</span> pantalla.</h2>
   </div>
-
-  <!-- Thumbnail clicable — funciona siempre -->
   <a class="reel-thumb reveal"
      href="https://youtu.be/d4Nj5xZElC0"
      target="_blank" rel="noopener">
@@ -549,20 +512,6 @@ footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase
       <span class="reel-play-label">Ver reel completo</span>
     </div>
   </a>
-
-  <!--
-  UNA VEZ que actives "Permitir inserción" en YouTube Studio,
-  borra el <a class="reel-thumb"> de arriba y descomenta esto:
-
-  <div class="reel-embed reveal">
-    <iframe
-      src="https://www.youtube.com/embed/d4Nj5xZElC0?rel=0&modestbranding=1"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen title="Roberto León — Reel TV">
-    </iframe>
-  </div>
-  -->
-
   <div class="reel-foot reveal">
     <p class="reel-meta">
       Director · DOP <span>·</span> Televisión Internacional <span>·</span> 15+ Años
@@ -572,324 +521,65 @@ footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase
     </a>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════
-     TV INTERNACIONAL — POSTERS + CHANNELS
-     4 posters 2:3 (fila superior)
-     6 thumbnails 16:9 en 3 columnas (fila inferior)
-     Proporción = igual que el sitio original
-════════════════════════════════════════ -->
+<!-- TV INTERNACIONAL -->
 <section class="section alt" id="tv">
   <div class="section-top reveal">
     <div class="section-label">Clientes &amp; Proyectos</div>
     <h2 class="section-h" style="margin-top:18px;">Televisión<br>Internacional.</h2>
   </div>
-
-  <!-- Posters verticales 2:3 -->
   <div class="posters-row reveal">
-
     <div class="poster-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_3202353ac4d74cd6a6b5edecb832b7a5~mv2.png"
-           alt="De Férias com o Ex Caribe" loading="lazy">
-      <div class="poster-info">
-        <div class="poster-show">De Férias com o Ex Caribe</div>
-        <div class="poster-network">MTV / Viacom</div>
-      </div>
+      <img src="https://static.wixstatic.com/media/8ae46b_3202353ac4d74cd6a6b5edecb832b7a5~mv2.png" alt="De Férias com o Ex Caribe" loading="lazy">
+      <div class="poster-info"><div class="poster-show">De Férias com o Ex Caribe</div><div class="poster-network">MTV / Viacom</div></div>
     </div>
-
     <div class="poster-card">
-      <!-- ⚠ ROBERTO: confirma nombre de este show -->
-      <img src="https://static.wixstatic.com/media/8ae46b_02c5f88338b2475ab936ff59b02965cc~mv2.png"
-           alt="De Férias com o Ex Caribe" loading="lazy">
-      <div class="poster-info">
-        <div class="poster-show">De Férias com o Ex Caribe</div>
-        <div class="poster-network">MTV / Viacom</div>
-      </div>
+      <img src="https://static.wixstatic.com/media/8ae46b_02c5f88338b2475ab936ff59b02965cc~mv2.png" alt="De Férias com o Ex Caribe" loading="lazy">
+      <div class="poster-info"><div class="poster-show">De Férias com o Ex Caribe</div><div class="poster-network">MTV / Viacom</div></div>
     </div>
-
     <div class="poster-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_765e9b624df7413abc996edd55e8413a~mv2.png"
-           alt="Dating Naked Germany" loading="lazy">
-      <div class="poster-info">
-        <div class="poster-show">Dating Naked Germany</div>
-        <div class="poster-network">Paramount+ Original</div>
-      </div>
+      <img src="https://static.wixstatic.com/media/8ae46b_765e9b624df7413abc996edd55e8413a~mv2.png" alt="Dating Naked Germany" loading="lazy">
+      <div class="poster-info"><div class="poster-show">Dating Naked Germany</div><div class="poster-network">Paramount+ Original</div></div>
     </div>
-
     <div class="poster-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_4aec23d4f67848dd86939cf239a525d9~mv2.png"
-           alt="Dating Naked UK" loading="lazy">
-      <div class="poster-info">
-        <div class="poster-show">Dating Naked UK</div>
-        <div class="poster-network">MTV / Viacom</div>
-      </div>
+      <img src="https://static.wixstatic.com/media/8ae46b_4aec23d4f67848dd86939cf239a525d9~mv2.png" alt="Dating Naked UK" loading="lazy">
+      <div class="poster-info"><div class="poster-show">Dating Naked UK</div><div class="poster-network">MTV / Viacom</div></div>
     </div>
-
   </div>
-
-  <!-- Thumbnails horizontales 16:9 — 3 columnas = igual que original -->
   <div class="channels-row reveal">
-
-    <div class="channel-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_e7e3a4aaa4a0496594ac76c25f524243~mv2.png"
-           alt="La Venganza de los Ex VIP" loading="lazy">
-      <div class="channel-info">
-        <div class="channel-show">La Venganza de los Ex VIP</div>
-        <div class="channel-net">MTV</div>
-      </div>
-    </div>
-
-    <div class="channel-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_c523058232c54f529a9c9d90dc1425f1~mv2.png"
-           alt="La Venganza de los Ex" loading="lazy">
-      <div class="channel-info">
-        <div class="channel-show">La Venganza de los Ex</div>
-        <div class="channel-net">MTV</div>
-      </div>
-    </div>
-
-    <div class="channel-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_43774f7fc4ce40489333229c2ad8bfe1~mv2.png"
-           alt="All Star Shore" loading="lazy">
-      <div class="channel-info">
-        <div class="channel-show">All Star Shore</div>
-        <div class="channel-net">MTV</div>
-      </div>
-    </div>
-
-    <div class="channel-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_e9058a975bfd4ef9867ed2bdfe4abeec~mv2.png"
-           alt="Celeb vagyok, ments ki innen!" loading="lazy">
-      <div class="channel-info">
-        <div class="channel-show">Celeb vagyok, ments ki innen!</div>
-        <div class="channel-net">Viacom International</div>
-      </div>
-    </div>
-
-    <div class="channel-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_1bd916147b824c2292f9b0d2dad687b7~mv2.png"
-           alt="Ex on the Beach Italia" loading="lazy">
-      <div class="channel-info">
-        <div class="channel-show">Ex on the Beach Italia</div>
-        <div class="channel-net">MTV</div>
-      </div>
-    </div>
-
-    <div class="channel-card">
-      <img src="https://static.wixstatic.com/media/8ae46b_488435de9e06486dad09bf0121caa600~mv2.png"
-           alt="Ex on the Beach Italia" loading="lazy">
-      <div class="channel-info">
-        <div class="channel-show">Ex on the Beach Italia</div>
-        <div class="channel-net">MTV</div>
-      </div>
-    </div>
-
+    <div class="channel-card"><img src="https://static.wixstatic.com/media/8ae46b_e7e3a4aaa4a0496594ac76c25f524243~mv2.png" alt="La Venganza de los Ex VIP" loading="lazy"><div class="channel-info"><div class="channel-show">La Venganza de los Ex VIP</div><div class="channel-net">MTV</div></div></div>
+    <div class="channel-card"><img src="https://static.wixstatic.com/media/8ae46b_c523058232c54f529a9c9d90dc1425f1~mv2.png" alt="La Venganza de los Ex" loading="lazy"><div class="channel-info"><div class="channel-show">La Venganza de los Ex</div><div class="channel-net">MTV</div></div></div>
+    <div class="channel-card"><img src="https://static.wixstatic.com/media/8ae46b_43774f7fc4ce40489333229c2ad8bfe1~mv2.png" alt="All Star Shore" loading="lazy"><div class="channel-info"><div class="channel-show">All Star Shore</div><div class="channel-net">MTV</div></div></div>
+    <div class="channel-card"><img src="https://static.wixstatic.com/media/8ae46b_e9058a975bfd4ef9867ed2bdfe4abeec~mv2.png" alt="Celeb vagyok" loading="lazy"><div class="channel-info"><div class="channel-show">Celeb vagyok, ments ki innen!</div><div class="channel-net">Viacom International</div></div></div>
+    <div class="channel-card"><img src="https://static.wixstatic.com/media/8ae46b_1bd916147b824c2292f9b0d2dad687b7~mv2.png" alt="Ex on the Beach Italia" loading="lazy"><div class="channel-info"><div class="channel-show">Ex on the Beach Italia</div><div class="channel-net">MTV</div></div></div>
+    <div class="channel-card"><img src="https://static.wixstatic.com/media/8ae46b_488435de9e06486dad09bf0121caa600~mv2.png" alt="Ex on the Beach Italia" loading="lazy"><div class="channel-info"><div class="channel-show">Ex on the Beach Italia</div><div class="channel-net">MTV</div></div></div>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════
-     TV SPOTS & PUBLICIDAD — todos los 12 videos
-     con nombres reales obtenidos de YouTube oEmbed
-════════════════════════════════════════ -->
+<!-- TV SPOTS & PUBLICIDAD -->
 <section class="section dark" id="spots">
   <div class="section-top reveal">
     <div class="section-label">TV Spots &amp; Publicidad</div>
     <h2 class="section-h" style="margin-top:18px;">Spots &amp;<br><span class="outline">videoclips.</span></h2>
   </div>
-
   <div class="video-grid reveal">
-
-    <!-- 01 · ALERTA KAMARADA (brRGmF5Px6I) — Videoclip -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=brRGmF5Px6I" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/brRGmF5Px6I/maxresdefault.jpg" alt="Alerta Kamarada" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">Videoclip</span>
-        <div class="video-info">
-          <div class="video-title">Alerta<br>Kamarada</div>
-          <div class="video-client">ft. Martina<br>la Peligrosa</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 02 · CAUTIVIA REEL (Og_48ZGY_ng) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=Og_48ZGY_ng" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/Og_48ZGY_ng/maxresdefault.jpg" alt="Cautivia Reel" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">Publicidad</span>
-        <div class="video-info">
-          <div class="video-title">Cautivia<br>Reel</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 03 · TV SPOT — FRISBY (71vLK9KyRhQ) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=71vLK9KyRhQ" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/71vLK9KyRhQ/maxresdefault.jpg" alt="Frisby TV Spot" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">TV Spot</span>
-        <div class="video-info">
-          <div class="video-title">Frisby</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 04 · TV SPOT — FEDEPAPA (XULuszhiKBg) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=XULuszhiKBg" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/XULuszhiKBg/maxresdefault.jpg" alt="FEDEPAPA TV Spot" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">TV Spot</span>
-        <div class="video-info">
-          <div class="video-title">FEDEPAPA</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 05 · TV SPOT — VEGGIE BITES (fBMVJosrvnM) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=fBMVJosrvnM" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/fBMVJosrvnM/maxresdefault.jpg" alt="Veggie Bites TV Spot" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">TV Spot</span>
-        <div class="video-info">
-          <div class="video-title">Veggie<br>Bites</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 06 · EPM DIRECTOR'S CUT (_kikDCbDu2w) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=_kikDCbDu2w" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/_kikDCbDu2w/maxresdefault.jpg" alt="EPM Director's Cut" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">Director's Cut</span>
-        <div class="video-info">
-          <div class="video-title">EPM</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 07 · TV SPOT — BODYTECH (tC7vI9EloD8) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=tC7vI9EloD8" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/tC7vI9EloD8/maxresdefault.jpg" alt="BodyTech TV Spot" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">TV Spot</span>
-        <div class="video-info">
-          <div class="video-title">BodyTech</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 08 · TV SPOT — FRUCO (-RpKmWinepc) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=-RpKmWinepc" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/-RpKmWinepc/maxresdefault.jpg" alt="Fruco TV Spot" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">TV Spot</span>
-        <div class="video-info">
-          <div class="video-title">Fruco</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 09 · PLAYDOH SWEETSHOPPE (Zry5UMmmmbY) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=Zry5UMmmmbY" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/Zry5UMmmmbY/maxresdefault.jpg" alt="Play-Doh SweetShoppe" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">Publicidad</span>
-        <div class="video-info">
-          <div class="video-title">Play-Doh<br>SweetShoppe</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 10 · HACEB REEL (1JMQacUDfwY) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=1JMQacUDfwY" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/1JMQacUDfwY/maxresdefault.jpg" alt="Haceb Reel" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">Publicidad</span>
-        <div class="video-info">
-          <div class="video-title">Haceb<br>Reel</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 11 · TV SPOT — FESTIVAL (Cg6wx-lnZJM) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=Cg6wx-lnZJM" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/Cg6wx-lnZJM/maxresdefault.jpg" alt="Festival TV Spot" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">TV Spot</span>
-        <div class="video-info">
-          <div class="video-title">Festival</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
-    <!-- 12 · TV SPOT — ALOHA (70xg3iMfgyM) -->
-    <a class="video-card" href="https://www.youtube.com/watch?v=70xg3iMfgyM" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/70xg3iMfgyM/maxresdefault.jpg" alt="Aloha TV Spot" loading="lazy">
-      <div class="video-overlay">
-        <span class="video-type">TV Spot</span>
-        <div class="video-info">
-          <div class="video-title">Aloha</div>
-          <div class="video-client">Director<br>DOP</div>
-        </div>
-      </div>
-      <div class="video-play">
-        <svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-    </a>
-
+    <a class="video-card" href="https://www.youtube.com/watch?v=brRGmF5Px6I" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/brRGmF5Px6I/maxresdefault.jpg" alt="Alerta Kamarada" loading="lazy"><div class="video-overlay"><span class="video-type">Videoclip</span><div class="video-info"><div class="video-title">Alerta<br>Kamarada</div><div class="video-client">ft. Martina<br>la Peligrosa</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=Og_48ZGY_ng" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Og_48ZGY_ng/maxresdefault.jpg" alt="Cautivia Reel" loading="lazy"><div class="video-overlay"><span class="video-type">Publicidad</span><div class="video-info"><div class="video-title">Cautivia<br>Reel</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=71vLK9KyRhQ" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/71vLK9KyRhQ/maxresdefault.jpg" alt="Frisby TV Spot" loading="lazy"><div class="video-overlay"><span class="video-type">TV Spot</span><div class="video-info"><div class="video-title">Frisby</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=XULuszhiKBg" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/XULuszhiKBg/maxresdefault.jpg" alt="FEDEPAPA TV Spot" loading="lazy"><div class="video-overlay"><span class="video-type">TV Spot</span><div class="video-info"><div class="video-title">FEDEPAPA</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=fBMVJosrvnM" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/fBMVJosrvnM/maxresdefault.jpg" alt="Veggie Bites TV Spot" loading="lazy"><div class="video-overlay"><span class="video-type">TV Spot</span><div class="video-info"><div class="video-title">Veggie<br>Bites</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=_kikDCbDu2w" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/_kikDCbDu2w/maxresdefault.jpg" alt="EPM Director's Cut" loading="lazy"><div class="video-overlay"><span class="video-type">Director's Cut</span><div class="video-info"><div class="video-title">EPM</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=tC7vI9EloD8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/tC7vI9EloD8/maxresdefault.jpg" alt="BodyTech TV Spot" loading="lazy"><div class="video-overlay"><span class="video-type">TV Spot</span><div class="video-info"><div class="video-title">BodyTech</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=-RpKmWinepc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/-RpKmWinepc/maxresdefault.jpg" alt="Fruco TV Spot" loading="lazy"><div class="video-overlay"><span class="video-type">TV Spot</span><div class="video-info"><div class="video-title">Fruco</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=Zry5UMmmmbY" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Zry5UMmmmbY/maxresdefault.jpg" alt="Play-Doh SweetShoppe" loading="lazy"><div class="video-overlay"><span class="video-type">Publicidad</span><div class="video-info"><div class="video-title">Play-Doh<br>SweetShoppe</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=1JMQacUDfwY" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/1JMQacUDfwY/maxresdefault.jpg" alt="Haceb Reel" loading="lazy"><div class="video-overlay"><span class="video-type">Publicidad</span><div class="video-info"><div class="video-title">Haceb<br>Reel</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=Cg6wx-lnZJM" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/Cg6wx-lnZJM/maxresdefault.jpg" alt="Festival TV Spot" loading="lazy"><div class="video-overlay"><span class="video-type">TV Spot</span><div class="video-info"><div class="video-title">Festival</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
+    <a class="video-card" href="https://www.youtube.com/watch?v=70xg3iMfgyM" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/70xg3iMfgyM/maxresdefault.jpg" alt="Aloha TV Spot" loading="lazy"><div class="video-overlay"><span class="video-type">TV Spot</span><div class="video-info"><div class="video-title">Aloha</div><div class="video-client">Director<br>DOP</div></div></div><div class="video-play"><svg class="play-svg" width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></a>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════
-     SOBRE MÍ
-════════════════════════════════════════ -->
+<!-- SOBRE MÍ -->
 <section class="section alt" id="about">
   <div class="about-grid">
     <div class="about-photo reveal">
-      <img src="https://static.wixstatic.com/media/8ae46b_890779f651f44d819d1e0c3d95c795fe~mv2.jpg"
-           alt="Roberto León" loading="lazy">
+      <img src="https://static.wixstatic.com/media/8ae46b_890779f651f44d819d1e0c3d95c795fe~mv2.jpg" alt="Roberto León" loading="lazy">
     </div>
     <div class="reveal">
       <div class="section-label">Director · DOP</div>
@@ -898,87 +588,41 @@ footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase
         <p>Soy Roberto León. <strong>15 años dirigiendo y fotografiando televisión internacional, publicidad y videoclips</strong> desde Bogotá.</p>
         <p>He trabajado con Viacom International y Paramount+ en producciones de reality TV de distribución global. TV, publicidad, videoclips — en cada proyecto la cámara va al límite.</p>
         <div class="stats">
-          <div>
-            <div class="stat-n">15+</div>
-            <div class="stat-l">Años de carrera</div>
-          </div>
-          <div>
-            <div class="stat-n">50+</div>
-            <div class="stat-l">Proyectos</div>
-          </div>
-          <div>
-            <!-- ⚠ ROBERTO: reemplaza con stat real verificado -->
-            <div class="stat-n">10+</div>
-            <div class="stat-l">Shows internacionales</div>
-          </div>
+          <div><div class="stat-n">15+</div><div class="stat-l">Años de carrera</div></div>
+          <div><div class="stat-n">50+</div><div class="stat-l">Proyectos</div></div>
+          <div><div class="stat-n">10+</div><div class="stat-l">Shows internacionales</div></div>
         </div>
-        <a href="./RobertoLeon_CV_ES_FINAL.pdf" class="btn-cv" target="_blank">
-          Ver CV completo &nbsp;→
-        </a>
+        <a href="./RobertoLeon_CV_ES_FINAL.pdf" class="btn-cv" target="_blank">Ver CV completo &nbsp;→</a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════
-     CONTACTO
-════════════════════════════════════════ -->
+<!-- CONTACTO -->
 <section class="section dark" id="contact">
   <div class="contact-grid">
-
     <div class="reveal">
       <div class="section-label">Contacto</div>
       <h2 class="contact-title" style="margin-top:18px;">Trabajemos<br><span class="red">juntos.</span></h2>
       <p class="contact-sub">¿Tienes una producción o campaña que necesita imágenes de nivel internacional? Hablemos.</p>
       <div class="contact-rows">
-        <div class="contact-row">
-          <span class="c-label">Ubicación</span>
-          <span class="c-val">Bogotá, Colombia</span>
-        </div>
-        <div class="contact-row">
-          <span class="c-label">Teléfono</span>
-          <span class="c-val"><a href="tel:+573208574286">+57 320 857 4286</a></span>
-        </div>
-        <div class="contact-row">
-          <span class="c-label">Email</span>
-          <!-- ⚠ ACCIÓN: cambia a roberto@robertoleono.com cuando lo configures -->
-          <span class="c-val"><a href="mailto:robertofilmaker@gmail.com">robertofilmaker@gmail.com</a></span>
-        </div>
-        <div class="contact-row">
-          <span class="c-label">Instagram</span>
-          <span class="c-val"><a href="https://www.instagram.com/robertoleonos/" target="_blank" rel="noopener">@robertoleonos</a></span>
-        </div>
+        <div class="contact-row"><span class="c-label">Ubicación</span><span class="c-val">Bogotá, Colombia</span></div>
+        <div class="contact-row"><span class="c-label">Teléfono</span><span class="c-val"><a href="tel:+573208574286">+57 320 857 4286</a></span></div>
+        <div class="contact-row"><span class="c-label">Email</span><span class="c-val"><a href="mailto:robertofilmaker@gmail.com">robertofilmaker@gmail.com</a></span></div>
+        <div class="contact-row"><span class="c-label">Instagram</span><span class="c-val"><a href="https://www.instagram.com/robertoleonos/" target="_blank" rel="noopener">@robertoleonos</a></span></div>
       </div>
     </div>
-
     <div class="contact-form-wrap reveal">
       <p class="form-h">Envía un mensaje</p>
-      <!-- Para activar envío real: crea cuenta gratis en formspree.io
-           y agrega action="https://formspree.io/f/TU_ID" method="POST" al form -->
       <form id="contactForm">
-        <div class="field">
-          <label for="fn">Nombre</label>
-          <input type="text" id="fn" name="nombre" required autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="fe">Email</label>
-          <input type="email" id="fe" name="email" required autocomplete="email">
-        </div>
-        <div class="field">
-          <label for="fp">Proyecto</label>
-          <input type="text" id="fp" name="proyecto">
-        </div>
-        <div class="field">
-          <label for="fm">Mensaje</label>
-          <textarea id="fm" name="mensaje" required></textarea>
-        </div>
+        <div class="field"><label for="fn">Nombre</label><input type="text" id="fn" name="nombre" required autocomplete="name"></div>
+        <div class="field"><label for="fe">Email</label><input type="email" id="fe" name="email" required autocomplete="email"></div>
+        <div class="field"><label for="fp">Proyecto</label><input type="text" id="fp" name="proyecto"></div>
+        <div class="field"><label for="fm">Mensaje</label><textarea id="fm" name="mensaje" required></textarea></div>
         <button type="submit" class="btn-send">Enviar →</button>
       </form>
     </div>
-
   </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">RL<span>.</span></div>
@@ -992,15 +636,11 @@ footer p { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase
     @robertoleonos
   </a>
 </footer>
-
 <script>
-/* Nav scroll */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
-
-/* Reveal on scroll */
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -1010,13 +650,9 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* Formulario — mailto fallback */
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   const f = this;
-  if (f.action && f.method && !f.action.includes(location.href)) {
-    return; // Formspree maneja el submit
-  }
+  if (f.action && f.method && !f.action.includes(location.href)) return;
   e.preventDefault();
   const s = encodeURIComponent('Proyecto — ' + (document.getElementById('fp').value || 'Consulta'));
   const b = encodeURIComponent(
