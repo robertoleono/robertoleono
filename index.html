@@ -463,6 +463,21 @@ footer p { font-size: 0.70rem; letter-spacing: 0.12em; text-transform: uppercase
 ::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb { background: #252525; }
+/* ── LANG TOGGLE ─────────────────────────────── */
+.lang-toggle {
+  display: flex; align-items: center; gap: 6px;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  padding-left: 22px; margin-left: 4px;
+}
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); transition: color 0.2s; padding: 0; line-height: 1;
+}
+.lang-btn.active { color: var(--white); }
+.lang-btn:hover { color: var(--white); }
+.lang-sep { color: rgba(255,255,255,0.14); font-size: 0.72rem; }
 </style>
 </head>
 <body>
@@ -472,8 +487,13 @@ footer p { font-size: 0.70rem; letter-spacing: 0.12em; text-transform: uppercase
   <div class="nav-right">
     <a href="#tv" class="nav-link">TV</a>
     <a href="#spots" class="nav-link">Spots</a>
-    <a href="#about" class="nav-link">Sobre mí</a>
-    <a href="#contact" class="nav-cta">Contacto</a>
+    <a href="#about" class="nav-link" id="nav-about">Sobre mí</a>
+    <a href="#contact" class="nav-cta" id="nav-contact">Contacto</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-es">ES</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" id="btn-en">EN</button>
+    </div>
   </div>
 </nav>
 <!-- HERO -->
@@ -637,10 +657,136 @@ footer p { font-size: 0.70rem; letter-spacing: 0.12em; text-transform: uppercase
   </a>
 </footer>
 <script>
+/* ── TRANSLATIONS ────────────────────────────── */
+const T = {
+  es: {
+    navAbout:      'Sobre mí',
+    navContact:    'Contacto',
+    heroTag:       'Director · Director de Fotografía · Bogotá',
+    heroCredits:   '<strong>Viacom International · MTV · Paramount+</strong><br>Dating Naked · De Férias com o Ex · La Venganza de los Ex · Televisión Internacional',
+    heroCta:       'Ver reel &nbsp;▶',
+    reelH:         'El trabajo<br><span class="outline">en</span> pantalla.',
+    reelPlay:      'Ver reel completo',
+    reelMeta:      'Director · DOP <span>·</span> Televisión Internacional <span>·</span> 15+ Años',
+    reelExt:       'Ver en YouTube ↗',
+    tvLabel:       'Clientes &amp; Proyectos',
+    tvH:           'Televisión<br>Internacional.',
+    spotsLabel:    'TV Spots &amp; Publicidad',
+    spotsH:        'Spots &amp;<br><span class="outline">videoclips.</span>',
+    aboutH:        'Imágenes que<br>no se <span class="red">olvidan.</span>',
+    aboutP1:       'Soy Roberto León. <strong>15 años dirigiendo y fotografiando televisión internacional, publicidad y videoclips</strong> desde Bogotá.',
+    aboutP2:       'He trabajado con Viacom International y Paramount+ en producciones de reality TV de distribución global. TV, publicidad, videoclips — en cada proyecto la cámara va al límite.',
+    stats:         ['Años de carrera','Proyectos','Shows internacionales'],
+    cv:            'Ver CV completo &nbsp;→',
+    contactLabel:  'Contacto',
+    contactTitle:  'Trabajemos<br><span class="red">juntos.</span>',
+    contactSub:    '¿Tienes una producción o campaña que necesita imágenes de nivel internacional? Hablemos.',
+    cLabels:       ['Ubicación','Teléfono','Email','Instagram'],
+    formH:         'Envía un mensaje',
+    formName:      'Nombre',
+    formProject:   'Proyecto',
+    formMessage:   'Mensaje',
+    formSend:      'Enviar →',
+    mailSubject:   'Proyecto — ',
+    mailFallback:  'Consulta',
+    mailName:      'Nombre: ',
+    mailProject:   'Proyecto: '
+  },
+  en: {
+    navAbout:      'About',
+    navContact:    'Contact',
+    heroTag:       'Director · Director of Photography · Bogotá',
+    heroCredits:   '<strong>Viacom International · MTV · Paramount+</strong><br>Dating Naked · De Férias com o Ex · La Venganza de los Ex · International Television',
+    heroCta:       'Watch reel &nbsp;▶',
+    reelH:         'The work<br><span class="outline">on</span> screen.',
+    reelPlay:      'Watch full reel',
+    reelMeta:      'Director · DOP <span>·</span> International Television <span>·</span> 15+ Years',
+    reelExt:       'Watch on YouTube ↗',
+    tvLabel:       'Clients &amp; Projects',
+    tvH:           'International<br>Television.',
+    spotsLabel:    'TV Spots &amp; Advertising',
+    spotsH:        'Spots &amp;<br><span class="outline">music videos.</span>',
+    aboutH:        'Images you<br>won\'t <span class="red">forget.</span>',
+    aboutP1:       'I\'m Roberto León. <strong>15 years directing and shooting international television, advertising, and music videos</strong> from Bogotá.',
+    aboutP2:       'I\'ve worked with Viacom International and Paramount+ on globally distributed reality TV productions. TV, advertising, music videos — every project pushes the camera to its limit.',
+    stats:         ['Years of experience','Projects','International shows'],
+    cv:            'View full CV &nbsp;→',
+    contactLabel:  'Contact',
+    contactTitle:  'Let\'s work<br><span class="red">together.</span>',
+    contactSub:    'Do you have a production or campaign that needs world-class visuals? Let\'s talk.',
+    cLabels:       ['Location','Phone','Email','Instagram'],
+    formH:         'Send a message',
+    formName:      'Name',
+    formProject:   'Project',
+    formMessage:   'Message',
+    formSend:      'Send →',
+    mailSubject:   'Project — ',
+    mailFallback:  'Inquiry',
+    mailName:      'Name: ',
+    mailProject:   'Project: '
+  }
+};
+
+/* ── APPLY LANGUAGE ──────────────────────────── */
+let currentLang = 'es';
+
+function applyLang(l) {
+  const t = T[l];
+  currentLang = l;
+
+  document.getElementById('nav-about').textContent        = t.navAbout;
+  document.getElementById('nav-contact').textContent      = t.navContact;
+  document.querySelector('.hero-tag').textContent         = t.heroTag;
+  document.querySelector('.hero-credits').innerHTML       = t.heroCredits;
+  document.querySelector('.hero-cta').innerHTML           = t.heroCta;
+  document.querySelector('.reel-section .section-h').innerHTML = t.reelH;
+  document.querySelector('.reel-play-label').textContent  = t.reelPlay;
+  document.querySelector('.reel-meta').innerHTML          = t.reelMeta;
+  document.querySelector('.reel-ext').textContent         = t.reelExt;
+  document.querySelector('#tv .section-label').innerHTML  = t.tvLabel;
+  document.querySelector('#tv .section-h').innerHTML      = t.tvH;
+  document.querySelector('#spots .section-label').innerHTML = t.spotsLabel;
+  document.querySelector('#spots .section-h').innerHTML   = t.spotsH;
+  document.querySelector('#about .about-body h2').innerHTML = t.aboutH;
+  const ps = document.querySelectorAll('#about .about-body p');
+  if (ps[0]) ps[0].innerHTML = t.aboutP1;
+  if (ps[1]) ps[1].innerHTML = t.aboutP2;
+  document.querySelectorAll('.stat-l').forEach((el,i) => { if (t.stats[i]) el.textContent = t.stats[i]; });
+  document.querySelector('.btn-cv').innerHTML             = t.cv;
+  document.querySelector('#contact .section-label').innerHTML = t.contactLabel;
+  document.querySelector('.contact-title').innerHTML      = t.contactTitle;
+  document.querySelector('.contact-sub').textContent      = t.contactSub;
+  document.querySelectorAll('.c-label').forEach((el,i) => { if (t.cLabels[i]) el.textContent = t.cLabels[i]; });
+  document.querySelector('.form-h').textContent           = t.formH;
+  const fn = document.querySelector('label[for="fn"]'); if (fn) fn.textContent = t.formName;
+  const fp = document.querySelector('label[for="fp"]'); if (fp) fp.textContent = t.formProject;
+  const fm = document.querySelector('label[for="fm"]'); if (fm) fm.textContent = t.formMessage;
+  document.querySelector('.btn-send').textContent         = t.formSend;
+
+  document.getElementById('btn-es').classList.toggle('active', l === 'es');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.documentElement.lang = l;
+  try { localStorage.setItem('rl-lang', l); } catch(e) {}
+}
+
+/* ── INIT LANGUAGE ───────────────────────────── */
+(function() {
+  let saved = null;
+  try { saved = localStorage.getItem('rl-lang'); } catch(e) {}
+  const browser = (navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es';
+  applyLang(saved || browser);
+})();
+
+document.getElementById('btn-es').addEventListener('click', () => applyLang('es'));
+document.getElementById('btn-en').addEventListener('click', () => applyLang('en'));
+
+/* ── NAV SCROLL ─────────────────────────────── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
+
+/* ── REVEAL ─────────────────────────────────── */
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -650,15 +796,18 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ── CONTACT FORM ────────────────────────────── */
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   const f = this;
   if (f.action && f.method && !f.action.includes(location.href)) return;
   e.preventDefault();
-  const s = encodeURIComponent('Proyecto — ' + (document.getElementById('fp').value || 'Consulta'));
+  const t = T[currentLang];
+  const s = encodeURIComponent(t.mailSubject + (document.getElementById('fp').value || t.mailFallback));
   const b = encodeURIComponent(
-    'Nombre: '   + document.getElementById('fn').value + '\n' +
-    'Email: '    + document.getElementById('fe').value + '\n' +
-    'Proyecto: ' + document.getElementById('fp').value + '\n\n' +
+    t.mailName    + document.getElementById('fn').value + '\n' +
+    'Email: '     + document.getElementById('fe').value + '\n' +
+    t.mailProject + document.getElementById('fp').value + '\n\n' +
     document.getElementById('fm').value
   );
   window.location.href = 'mailto:robertofilmaker@gmail.com?subject=' + s + '&body=' + b;
