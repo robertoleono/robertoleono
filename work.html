@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!-- BRIO-DIRECTIONS
+  DIRECTION: "EL TRABAJO EN PANTALLA" - obra: reel full-frame + carteles de realitys en grid justificado + comerciales + video clip. Clic reproduce INLINE. Misma fuente que el resto del sitio (Inter + JetBrains Mono), blanco. i18n ES/EN real con toggle en el header y persistencia.
+  REF: https://www.robertoleono.com/
+  REF: https://www.academyfilms.com/
+  REF: https://smuggler.com/
+  PRINCIPLE: Inter grotesca pesada + JetBrains Mono labels, blanco, key art real. Grid justificado. i18n sin falla.
+  GENERIC-KILL: reel full-frame del DP + grid justificado de key art real + spots inline; ningun template produce esto.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roberto León — El trabajo</title>
+<meta name="description" content="El trabajo de Roberto León. Televisión internacional, publicidad y videoclips. Director · DOP, ARRI Certified.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#000;--paper:#fff;--mute:rgba(255,255,255,.62);--hair:rgba(255,255,255,.16);--red:#fff;--ease:cubic-bezier(.22,.61,.36,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#fff;color:#0a0a0a;font-family:"Inter",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  ::selection{background:#0a0a0a;color:#fff}
+  a{color:inherit;text-decoration:none}
+
+  .bar{position:sticky;top:0;z-index:60;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:0.5px solid rgba(0,0,0,.1)}
+  .bar .wm{font-family:"Inter",sans-serif;font-weight:900;letter-spacing:.02em;text-transform:uppercase;font-size:17px}
+  .bar nav{display:flex;gap:26px;align-items:center}
+  .bar nav a{font-family:"JetBrains Mono",monospace;text-transform:uppercase;font-size:11px;font-weight:500;letter-spacing:.16em;opacity:.78;transition:opacity .3s var(--ease)}
+  .bar nav a:hover{opacity:1}
+  .region{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;display:inline-flex;align-items:center}
+  .region span[data-lang]{cursor:pointer;opacity:.4;transition:opacity .3s}
+  .region span.on{opacity:1}
+  .region .sep{opacity:.3;margin:0 6px;cursor:default}
+
+  /* reel full-frame */
+  .reel{position:relative;width:100%;height:82vh;overflow:hidden;background:#e9e9e9;cursor:pointer;display:block}
+  .reel .thumb{position:absolute;inset:0;background-position:center;background-size:cover;filter:brightness(.78);transition:filter .5s var(--ease),transform .8s var(--ease)}
+  .reel:hover .thumb{filter:brightness(.92);transform:scale(1.02)}
+  .reel .grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.74) 0%,rgba(0,0,0,0) 54%)}
+  .reelmeta{position:absolute;left:40px;right:40px;bottom:46px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+  .reel .wtag{position:static;font-family:"JetBrains Mono",monospace;color:var(--red);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:14px}
+  .reel .wtitle{position:static;font-family:"Inter",sans-serif;font-size:clamp(32px,5vw,72px);font-weight:900;text-transform:uppercase;line-height:.9;letter-spacing:-.02em;max-width:none;color:#fff;text-shadow:0 1px 24px rgba(0,0,0,.45)}
+  .reel .wrole{position:static;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.14em;color:rgba(255,255,255,.62);text-transform:uppercase;white-space:nowrap;padding-bottom:8px}
+
+  section{padding:62px 40px 26px;max-width:1500px;margin:0 auto}
+  .sec{font-family:"Inter",sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(1.7rem,3.4vw,2.9rem);line-height:1;margin-bottom:8px}
+  .seclead{color:rgba(0,0,0,.55);font-size:14px;font-weight:500;letter-spacing:.01em;margin-bottom:28px;max-width:460px;line-height:1.5}
+
+  .posters-port{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+  .posters-port img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#e9e9e9}
+  .posters-land{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .posters-land img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#e9e9e9}
+
+  .wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+  .wgrid.one{grid-template-columns:minmax(0,680px)}
+  .wcard{position:relative;aspect-ratio:16/9;overflow:hidden;background:#e9e9e9;cursor:pointer;display:block}
+  .wcard .thumb{position:absolute;inset:0;background-position:center;background-size:cover;filter:brightness(.74);transition:filter .45s var(--ease),transform .6s var(--ease)}
+  .wcard:hover .thumb{filter:brightness(.92);transform:scale(1.035)}
+  .wcard .grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 42%)}
+  .wtag{position:absolute;top:15px;left:17px;font-family:"JetBrains Mono",monospace;color:var(--red);font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+  .wtitle{position:absolute;left:17px;bottom:15px;font-family:"Inter",sans-serif;font-size:clamp(18px,2vw,24px);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:.95;max-width:62%;color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.5)}
+  .wrole{position:absolute;right:17px;bottom:16px;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:500;letter-spacing:.14em;color:rgba(255,255,255,.62);text-transform:uppercase;text-align:right}
+  .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:50%;border:1.6px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;font-size:20px;opacity:0;transition:opacity .35s var(--ease);z-index:2;color:#fff}
+  .wcard:hover .play,.reel:hover .play{opacity:.95}
+  .playing{cursor:default}
+  .cardvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;outline:0}
+
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;z-index:70}
+  .burger span{display:block;width:24px;height:2px;background:#0a0a0a}
+  .mobmenu{position:fixed;inset:0;z-index:200;background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+  .mobmenu.open{opacity:1;pointer-events:auto}
+  .mobmenu a{font-family:"Inter",sans-serif;color:#fff;text-transform:uppercase;font-weight:800;letter-spacing:.02em;font-size:30px;text-decoration:none}
+  .mobmenu .mlang{margin-top:24px;font-family:"JetBrains Mono",monospace;font-size:14px;letter-spacing:.18em;color:#fff}
+  .mobmenu .mlang span[data-lang]{opacity:.4;cursor:pointer;padding:0 5px}
+  .mobmenu .mlang span.on{opacity:1}
+  .mobclose{position:absolute;top:16px;right:22px;background:none;border:0;color:#fff;font-size:40px;line-height:1;cursor:pointer}
+
+  @media (max-width:760px){
+    .bar{padding:0 20px;height:52px}
+    .bar nav{display:none}
+    .burger{display:flex}
+    .reel{height:52vh}
+    .reelmeta{left:20px;right:20px;bottom:26px;flex-direction:column;align-items:flex-start;gap:8px}
+    .reel .wtitle{font-size:34px}
+    .reel .wrole{padding-bottom:0}
+    section{padding:48px 20px 22px}
+    .posters-port{grid-template-columns:repeat(2,1fr);gap:10px}
+    .posters-land{grid-template-columns:repeat(2,1fr);gap:10px}
+    .wgrid{grid-template-columns:1fr;gap:12px}
+  }
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <a class="wm" href="index.html">Roberto León</a>
+    <nav>
+      <a href="index.html">Reel</a>
+      <a href="about.html" data-es="Perfil" data-en="About">Perfil</a>
+      <a href="about.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+      <span class="region"><span class="on" data-lang="es">ES</span><span class="sep">|</span><span data-lang="en">EN</span></span>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </header>
+
+  <div class="mobmenu" id="mobmenu">
+    <button class="mobclose" id="mobclose">&times;</button>
+    <a href="index.html">Reel</a>
+    <a href="about.html" data-es="Perfil" data-en="About">Perfil</a>
+    <a href="about.html#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+    <div class="mlang"><span class="on" data-lang="es">ES</span> | <span data-lang="en">EN</span></div>
+  </div>
+
+  <div class="reel wcard" data-vid="d4Nj5xZElC0">
+    <div class="thumb" style="background-image:url('media/posters/d4Nj5xZElC0.jpg')"></div>
+    <div class="grad"></div>
+    <div class="reelmeta">
+      <div><div class="wtag" data-es="Reel · Televisión" data-en="Reel · Television">Reel · Televisión</div><div class="wtitle">De Férias com o Ex</div></div>
+      <div class="wrole">Director / DOP</div>
+    </div>
+    <div class="play">&#9654;</div>
+  </div>
+
+  <section id="tv">
+    <h2 class="sec" data-es="Televisión Internacional" data-en="International Television">Televisión Internacional</h2>
+    <p class="seclead" data-es="Veinte temporadas de reality en siete países. Paramount, FOX y MTV." data-en="Twenty reality seasons across seven countries. Paramount, FOX and MTV.">Veinte temporadas de reality en siete países. Paramount, FOX y MTV.</p>
+    <div class="posters-port">
+      <img src="media/carteles/deferias_caribe_1.jpg" alt="De Férias com o Ex Caribe">
+      <img src="media/carteles/dating_naked_de.jpg" alt="Dating Naked Germany">
+      <img src="media/carteles/dating_naked_uk.jpg" alt="Dating Naked UK">
+      <img src="media/carteles/deferias_caribe_2.jpg" alt="De Férias com o Ex Caribe">
+    </div>
+    <div class="posters-land">
+      <img src="media/carteles/lvde_vip.jpg" alt="La Venganza de los Ex VIP">
+      <img src="media/carteles/all_star_shore.jpg" alt="All Star Shore">
+      <img src="media/carteles/eotb_italia_1.jpg" alt="Ex on the Beach Italia">
+      <img src="media/carteles/lvde.jpg" alt="La Venganza de los Ex">
+      <img src="media/carteles/eotb_italia_2.jpg" alt="Ex on the Beach Italia">
+      <img src="media/carteles/celeb_vagyok.jpg" alt="I'm a Celebrity">
+    </div>
+  </section>
+
+  <section id="comerciales">
+    <h2 class="sec" data-es="Comerciales" data-en="Commercials">Comerciales</h2>
+    <p class="seclead" data-es="Unilever, Claro, Nutresa y Frisby. Con McCann, Sancho BBDO y Havas." data-en="Unilever, Claro, Nutresa and Frisby. With McCann, Sancho BBDO and Havas.">Unilever, Claro, Nutresa y Frisby. Con McCann, Sancho BBDO y Havas.</p>
+    <div class="wgrid">
+      <div class="wcard" data-vid="-RpKmWinepc"><div class="thumb" style="background-image:url('media/posters/-RpKmWinepc.jpg')"></div><div class="grad"></div><div class="wtag">TV Spot</div><div class="wtitle">Fruco</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="XULuszhiKBg"><div class="thumb" style="background-image:url('media/posters/XULuszhiKBg.jpg')"></div><div class="grad"></div><div class="wtag">TV Spot</div><div class="wtitle">Fedepapa</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="71vLK9KyRhQ"><div class="thumb" style="background-image:url('media/posters/71vLK9KyRhQ.jpg')"></div><div class="grad"></div><div class="wtag">TV Spot</div><div class="wtitle">Frisby</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="tC7vI9EloD8"><div class="thumb" style="background-image:url('media/posters/tC7vI9EloD8.jpg')"></div><div class="grad"></div><div class="wtag">TV Spot</div><div class="wtitle">Bodytech</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="_kikDCbDu2w"><div class="thumb" style="background-image:url('media/posters/_kikDCbDu2w.jpg')"></div><div class="grad"></div><div class="wtag">Director's Cut</div><div class="wtitle">EPM</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="Zry5UMmmmbY"><div class="thumb" style="background-image:url('media/posters/Zry5UMmmmbY.jpg')"></div><div class="grad"></div><div class="wtag" data-es="Publicidad" data-en="Advertising">Publicidad</div><div class="wtitle">Play-Doh</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="fBMVJosrvnM"><div class="thumb" style="background-image:url('media/posters/fBMVJosrvnM.jpg')"></div><div class="grad"></div><div class="wtag">TV Spot</div><div class="wtitle">Veggie Bites</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="Cg6wx-lnZJM"><div class="thumb" style="background-image:url('media/posters/Cg6wx-lnZJM.jpg')"></div><div class="grad"></div><div class="wtag">TV Spot</div><div class="wtitle">Festival</div><div class="wrole">Director / DOP</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="70xg3iMfgyM"><div class="thumb" style="background-image:url('media/posters/70xg3iMfgyM.jpg')"></div><div class="grad"></div><div class="wtag">TV Spot</div><div class="wtitle">Aloha</div><div class="wrole">Director / DOP</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="1JMQacUDfwY"><div class="thumb" style="background-image:url('media/posters/1JMQacUDfwY.jpg')"></div><div class="grad"></div><div class="wtag">Reel</div><div class="wtitle">Haceb</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+      <div class="wcard" data-vid="Og_48ZGY_ng"><div class="thumb" style="background-image:url('media/posters/Og_48ZGY_ng.jpg')"></div><div class="grad"></div><div class="wtag">Reel</div><div class="wtitle">Cautiva</div><div class="wrole">Director</div><div class="play">&#9654;</div></div>
+    </div>
+  </section>
+
+  <div class="reel wcard" id="videoclip" data-vid="brRGmF5Px6I">
+    <div class="thumb" style="background-image:url('media/posters/brRGmF5Px6I.jpg')"></div>
+    <div class="grad"></div>
+    <div class="reelmeta">
+      <div><div class="wtag" data-es="Video Clip" data-en="Music Video">Video Clip</div><div class="wtitle">Alerta Kamarada</div></div>
+      <div class="wrole">Ft. Martina la Peligrosa</div>
+    </div>
+    <div class="play">&#9654;</div>
+  </div>
+
+<script>
+  /* ===== i18n ES/EN ===== */
+  function applyLang(lang){
+    document.documentElement.lang = lang;
+    window.__lang = lang;
+    document.querySelectorAll('[data-es]').forEach(function(el){ var v=el.getAttribute('data-'+lang); if(v!=null) el.innerHTML=v; });
+    document.querySelectorAll('[data-lang]').forEach(function(s){ s.classList.toggle('on', s.getAttribute('data-lang')===lang); });
+    try{ localStorage.setItem('rl_lang', lang); }catch(e){}
+  }
+  document.querySelectorAll('[data-lang]').forEach(function(s){ s.addEventListener('click', function(){ applyLang(s.getAttribute('data-lang')); }); });
+  (function(){ var s='es'; try{ s=localStorage.getItem('rl_lang')||'es'; }catch(e){} applyLang(s); })();
+
+  /* ===== reproducir inline ===== */
+  document.querySelectorAll('.wcard[data-vid]').forEach(function(c){
+    c.addEventListener('click', function(){
+      if(c.classList.contains('playing')) return;
+      var id=c.dataset.vid;
+      var v=document.createElement('video');
+      v.src='media/'+id+'.mp4'; v.controls=true; v.autoplay=true; v.playsInline=true; v.className='cardvid';
+      c.innerHTML=''; c.appendChild(v); c.classList.add('playing');
+      v.play().catch(function(){});
+    });
+  });
+  var _b=document.getElementById('burger');
+  if(_b){ var _m=document.getElementById('mobmenu');
+    _b.onclick=function(){_m.classList.add('open');};
+    document.getElementById('mobclose').onclick=function(){_m.classList.remove('open');};
+    _m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){_m.classList.remove('open');});});
+  }
+</script>
+</body>
+</html>

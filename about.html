@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- BRIO-DIRECTIONS
+  DIRECTION: about COHERENTE con el landing - misma fuente (Inter display + JetBrains Mono labels) que el resto del sitio, fondo blanco, tinta. Estructura editorial Pulse (foto B&N + lede + bio + listas nombre/rol con hairlines). i18n ES/EN real: cada string traduce, persiste en localStorage, toggle en el header.
+  REF: https://www.academyfilms.com/
+  REF: https://pulsefilms.com
+  REF: https://www.somesuch.co
+  PRINCIPLE: blanco + Inter + JetBrains Mono + tinta; hairlines; foto B&W; listas nombre + rol. Misma fuente que landing. i18n sin falla.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roberto León — About</title>
+<meta name="description" content="Roberto León. Director y DOP certificado ARRI, con base en Bogotá. 15 años en televisión internacional, publicidad y videoclips.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#ffffff;--ink:#0a0a0a;--mut:rgba(10,10,10,.55);--hair:rgba(10,10,10,.16);--lime:#c9e24a;--ease:cubic-bezier(.22,.61,.36,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--ink);color:var(--paper)}
+  a{color:inherit;text-decoration:none}
+  .lbl{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+
+  .bar{position:sticky;top:0;z-index:60;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:62px;padding:0 34px;background:var(--paper);border-bottom:1px solid var(--hair)}
+  .bar .l{display:flex;gap:26px;justify-content:flex-start}
+  .bar .r{display:flex;gap:22px;justify-content:flex-end;align-items:center}
+  .bar a.nav{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;transition:opacity .3s}
+  .bar a.nav:hover{opacity:.55}
+  .bar .wm{font-family:"Inter",sans-serif;font-weight:900;font-size:23px;letter-spacing:.01em;text-transform:uppercase;text-align:center;white-space:nowrap}
+  .region{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;display:inline-flex;align-items:center}
+  .region span[data-lang]{cursor:pointer;opacity:.4;transition:opacity .3s}
+  .region span.on{opacity:1}
+  .region .sep{opacity:.3;margin:0 6px;cursor:default}
+
+  .wrap{max-width:1320px;margin:0 auto;padding:40px 34px 0}
+  .toprow{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--hair)}
+  .toprow .loc{font-family:"Inter",sans-serif;font-weight:900;font-size:clamp(1.7rem,3vw,2.6rem);text-transform:uppercase;letter-spacing:-.02em;line-height:1}
+
+  .panel{display:grid;grid-template-columns:.92fr 1.08fr;gap:48px;padding:34px 0 0}
+  .photo{position:relative;width:100%;aspect-ratio:1/1;background:#d7d4c9 center/cover no-repeat;filter:grayscale(1) contrast(1.04)}
+  .addr{margin-top:26px;display:flex;flex-direction:column;gap:5px}
+  .addr div{font-size:13.5px;line-height:1.7}
+  .addr .big{font-weight:600;font-size:15px}
+
+  .lede{font-family:"Inter",sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:1.02;font-size:clamp(1.8rem,3.5vw,3.1rem);margin-bottom:22px}
+  .bio{font-size:15px;line-height:1.8;color:rgba(10,10,10,.8);max-width:54ch;margin-bottom:36px;font-weight:500}
+  .bio b{font-weight:700;color:var(--ink)}
+
+  .clist{border-top:1px solid var(--hair)}
+  .clist .grp{padding:22px 0 4px}
+  .clist .glabel{margin-bottom:16px}
+  .crow{display:flex;justify-content:space-between;gap:18px;padding:8px 0}
+  .crow .nm{font-size:15px;font-weight:600;letter-spacing:-.005em}
+  .crow .ro{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--mut);text-align:right;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+  .clist .grp + .grp{border-top:1px solid var(--hair)}
+
+  /* contacto */
+  #contact{max-width:1320px;margin:64px auto 0;padding:40px 34px 90px;border-top:1px solid var(--ink)}
+  .cgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:start}
+  .ccta{font-family:"Inter",sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.025em;line-height:.96;font-size:clamp(2.2rem,5vw,4.2rem);margin-bottom:10px}
+  .csub{font-size:14px;line-height:1.7;color:var(--mut);max-width:46ch;margin-bottom:34px;font-weight:500}
+  .cform{display:flex;flex-direction:column}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .cform input,.cform textarea{width:100%;border:0;border-bottom:1px solid var(--hair);background:none;padding:14px 2px;font-family:"Inter",sans-serif;font-size:15px;font-weight:500;color:var(--ink);outline:none;transition:border-color .3s;resize:none}
+  .cform input::placeholder,.cform textarea::placeholder{color:var(--mut)}
+  .cform input:focus,.cform textarea:focus{border-color:var(--ink)}
+  .cform textarea{margin-top:8px}
+  .cform button{margin-top:26px;align-self:flex-start;background:var(--ink);color:var(--paper);border:0;cursor:pointer;text-transform:uppercase;font-family:"JetBrains Mono",monospace;font-weight:700;letter-spacing:.16em;font-size:12px;padding:15px 36px;transition:opacity .3s}
+  .cform button:hover{opacity:.82}.cform button:disabled{opacity:.45}
+  .fmsg{margin-top:16px;font-size:12px;font-weight:600;letter-spacing:.02em;min-height:16px;font-family:"JetBrains Mono",monospace}
+  .fmsg.ok{color:#1d6b3f}.fmsg.err{color:#9a2a1e}
+  .cdir{border-top:1px solid var(--hair)}
+  .cdir a,.cdir .row{display:flex;justify-content:space-between;gap:18px;padding:16px 2px;border-bottom:1px solid var(--hair);transition:padding-left .3s var(--ease)}
+  .cdir a:hover{padding-left:7px}
+  .cdir .k{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+  .cdir .v{font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+  .cdir .v svg{width:14px;height:14px;fill:currentColor}
+
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;z-index:70}
+  .burger span{display:block;width:24px;height:2px;background:var(--ink)}
+  .mobmenu{position:fixed;inset:0;z-index:200;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+  .mobmenu.open{opacity:1;pointer-events:auto}
+  .mobmenu a{font-family:"Inter",sans-serif;color:var(--ink);text-transform:uppercase;font-weight:800;letter-spacing:.02em;font-size:30px}
+  .mobmenu .mlang{margin-top:24px;font-family:"JetBrains Mono",monospace;font-size:14px;letter-spacing:.18em}
+  .mobmenu .mlang span[data-lang]{opacity:.4;cursor:pointer;padding:0 5px}
+  .mobmenu .mlang span.on{opacity:1}
+  .mobclose{position:absolute;top:16px;right:24px;background:none;border:0;color:var(--ink);font-size:38px;line-height:1;cursor:pointer}
+
+  @media (max-width:860px){
+    .bar{display:flex;align-items:center;justify-content:space-between;padding:0 18px}.bar .l,.bar .r{display:none}.burger{display:flex}.bar .wm{text-align:left}
+    .wrap{padding:28px 18px 0}
+    .panel{grid-template-columns:1fr;gap:30px}
+    .crow{flex-direction:column;gap:2px}.crow .ro{text-align:left}
+    #contact{padding:34px 18px 70px}.cgrid{grid-template-columns:1fr;gap:38px}.frow{grid-template-columns:1fr;gap:0}
+  }
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <div class="l"><a class="nav" href="index.html">Reel</a><a class="nav" href="work.html" data-es="Trabajo" data-en="Work">Trabajo</a></div>
+    <a class="wm" href="index.html">Roberto León</a>
+    <div class="r">
+      <a class="nav" href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+      <span class="region"><span class="on" data-lang="es">ES</span><span class="sep">|</span><span data-lang="en">EN</span></span>
+    </div>
+    <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </header>
+
+  <div class="mobmenu" id="mobmenu">
+    <button class="mobclose" id="mobclose">&times;</button>
+    <a href="index.html">Reel</a>
+    <a href="work.html" data-es="Trabajo" data-en="Work">Trabajo</a>
+    <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+    <div class="mlang"><span class="on" data-lang="es">ES</span> | <span data-lang="en">EN</span></div>
+  </div>
+
+  <div class="wrap">
+    <div class="toprow">
+      <div class="loc">Bogotá</div>
+      <div class="lbl" data-es="Director · Director de Fotografía" data-en="Director · Director of Photography">Director · Director de Fotografía</div>
+    </div>
+
+    <div class="panel">
+      <div>
+        <div class="photo" id="photo" style="background-image:url('media/about_portrait.jpg?v=2')"></div>
+        <div class="addr">
+          <div class="lbl" data-es="Base" data-en="Based in">Base</div>
+          <div class="big" data-es="Bogotá — disponible internacional" data-en="Bogotá — available worldwide">Bogotá — disponible internacional</div>
+        </div>
+      </div>
+
+      <div>
+        <h1 class="lede" data-es="La imagen y la dirección,<br>bajo un mismo ojo." data-en="Image and direction,<br>through a single eye.">La imagen y la dirección,<br>bajo un mismo ojo.</h1>
+        <p class="bio" data-es="Quince años poniendo la cámara al límite en televisión internacional, publicidad y videoclips. Dirección creativa e imagen bajo un mismo criterio: el plano que se decide y el plano que se ejecuta son el mismo. <b>Certificado ARRI. Sub Aqua. Trilingüe. Formado en la EICTV de Cuba.</b>" data-en="Fifteen years pushing the camera to its limit across international television, advertising and music videos. Creative direction and image under one eye: the shot that's decided is the shot that's shot. <b>ARRI Certified. Sub Aqua. Trilingual. Trained at the EICTV in Cuba.</b>">Quince años poniendo la cámara al límite en televisión internacional, publicidad y videoclips. Dirección creativa e imagen bajo un mismo criterio: el plano que se decide y el plano que se ejecuta son el mismo. <b>Certificado ARRI. Sub Aqua. Trilingüe. Formado en la EICTV de Cuba.</b></p>
+
+        <div class="clist">
+          <div class="grp">
+            <div class="lbl glabel" data-es="Televisión Internacional · Paramount · FOX · MTV" data-en="International Television · Paramount · FOX · MTV">Televisión Internacional · Paramount · FOX · MTV</div>
+            <div class="crow"><span class="nm">De Férias com o Ex</span><span class="ro" data-es="DOP · Cámara" data-en="DOP · Camera">DOP · Cámara</span></div>
+            <div class="crow"><span class="nm">La Venganza de los Ex VIP</span><span class="ro" data-es="DOP · Cámara" data-en="DOP · Camera">DOP · Cámara</span></div>
+            <div class="crow"><span class="nm">Ex on the Beach Italia</span><span class="ro" data-es="DOP · Cámara" data-en="DOP · Camera">DOP · Cámara</span></div>
+            <div class="crow"><span class="nm">All Star Shore</span><span class="ro" data-es="DOP · 2.ª Unidad" data-en="DOP · 2nd Unit">DOP · 2.ª Unidad</span></div>
+            <div class="crow"><span class="nm">Dating Naked · I'm a Celebrity</span><span class="ro" data-es="Cámara" data-en="Camera">Cámara</span></div>
+          </div>
+          <div class="grp">
+            <div class="lbl glabel" data-es="Publicidad · McCann · Sancho BBDO · Havas" data-en="Advertising · McCann · Sancho BBDO · Havas">Publicidad · McCann · Sancho BBDO · Havas</div>
+            <div class="crow"><span class="nm">Fruco · Fedepapa · Frisby</span><span class="ro">Director</span></div>
+            <div class="crow"><span class="nm">Bodytech · Veggie Bites · EPM</span><span class="ro">Director</span></div>
+            <div class="crow"><span class="nm">Festival · Aloha</span><span class="ro">Director · DOP</span></div>
+            <div class="crow"><span class="nm">Unilever · Claro · Nutresa</span><span class="ro" data-es="Marcas" data-en="Brands">Marcas</span></div>
+          </div>
+          <div class="grp">
+            <div class="lbl glabel" data-es="Equipo · Certificaciones · Idiomas" data-en="Gear · Certifications · Languages">Equipo · Certificaciones · Idiomas</div>
+            <div class="crow"><span class="nm">ARRI Certified</span><span class="ro">MINI · LF · SXT · SXTW · AMIRA</span></div>
+            <div class="crow"><span class="nm">PADI Advanced · Sub Aqua</span><span class="ro">Ikelite</span></div>
+            <div class="crow"><span class="nm" data-es="Español · Inglés · Italiano" data-en="Spanish · English · Italian">Español · Inglés · Italiano</span><span class="ro" data-es="Sin traductor" data-en="No interpreter">Sin traductor</span></div>
+            <div class="crow"><span class="nm">EICTV Cuba · ARRI School</span><span class="ro" data-es="Formación" data-en="Training">Formación</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="contact">
+    <div class="cgrid">
+      <div>
+        <h2 class="ccta" data-es="Trabajemos<br>juntos" data-en="Let's work<br>together">Trabajemos<br>juntos</h2>
+        <p class="csub" data-es="Una producción o campaña que necesita imágenes de nivel internacional. Cuéntame qué estás rodando." data-en="A production or campaign that needs world-class imagery. Tell me what you're shooting.">Una producción o campaña que necesita imágenes de nivel internacional. Cuéntame qué estás rodando.</p>
+        <form class="cform" id="cform">
+          <div class="frow">
+            <input name="name" data-es-ph="Nombre" data-en-ph="Name" placeholder="Nombre" required maxlength="120">
+            <input name="email" type="email" data-es-ph="Email" data-en-ph="Email" placeholder="Email" required maxlength="160">
+          </div>
+          <textarea name="message" data-es-ph="El proyecto" data-en-ph="The project" placeholder="El proyecto" rows="3" required maxlength="3000"></textarea>
+          <button type="submit" id="cbtn" data-es="Enviar" data-en="Send">Enviar</button>
+          <div class="fmsg" id="fmsg"></div>
+        </form>
+      </div>
+      <div class="cdir">
+        <a href="mailto:hola@robertoleono.com"><span class="k">Email</span><span class="v">hola@robertoleono.com</span></a>
+        <a href="tel:+573208574286"><span class="k" data-es="Teléfono" data-en="Phone">Teléfono</span><span class="v">+57 320 857 4286</span></a>
+        <a href="https://wa.me/573208574286?text=Hola%2C%20vi%20tu%20portafolio%20y%20quiero%20hablar%20de%20un%20proyecto." target="_blank" rel="noopener"><span class="k">WhatsApp</span><span class="v"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.516 5.26l-.999 3.648 3.742-.982zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg><span data-es="Escríbeme" data-en="Message me">Escríbeme</span></span></a>
+        <div class="row"><span class="k" data-es="Base" data-en="Based">Base</span><span class="v" style="font-weight:500;color:var(--mut)" data-es="Bogotá · internacional" data-en="Bogotá · worldwide">Bogotá · internacional</span></div>
+      </div>
+    </div>
+  </section>
+
+<script>
+  /* ===== i18n ES/EN ===== */
+  var L={
+    es:{send:'Enviar',sending:'Enviando...',fill:'Completa todos los campos.',ok:'Gracias. Tu mensaje llegó — respondo pronto.',err:'No se pudo enviar. Escríbeme a hola@robertoleono.com'},
+    en:{send:'Send',sending:'Sending...',fill:'Please fill in all fields.',ok:'Thanks. Your message arrived — I\'ll reply soon.',err:'Could not send. Email me at hola@robertoleono.com'}
+  };
+  function tl(k){ return (L[window.__lang||'es']||L.es)[k]; }
+  function applyLang(lang){
+    document.documentElement.lang = lang;
+    window.__lang = lang;
+    document.querySelectorAll('[data-es]').forEach(function(el){ var v=el.getAttribute('data-'+lang); if(v!=null) el.innerHTML=v; });
+    document.querySelectorAll('[data-es-ph]').forEach(function(el){ var v=el.getAttribute('data-'+lang+'-ph'); if(v!=null) el.placeholder=v; });
+    document.querySelectorAll('[data-lang]').forEach(function(s){ s.classList.toggle('on', s.getAttribute('data-lang')===lang); });
+    try{ localStorage.setItem('rl_lang', lang); }catch(e){}
+  }
+  document.querySelectorAll('[data-lang]').forEach(function(s){ s.addEventListener('click', function(){ applyLang(s.getAttribute('data-lang')); }); });
+  (function(){ var s='es'; try{ s=localStorage.getItem('rl_lang')||'es'; }catch(e){} applyLang(s); })();
+
+  /* ===== menú móvil + formulario ===== */
+  var _b=document.getElementById('burger');
+  if(_b){ var _m=document.getElementById('mobmenu');
+    _b.onclick=function(){_m.classList.add('open');};
+    document.getElementById('mobclose').onclick=function(){_m.classList.remove('open');};
+    _m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){_m.classList.remove('open');});});
+  }
+  var f=document.getElementById('cform'), msg=document.getElementById('fmsg'), btn=document.getElementById('cbtn');
+  /* Sin backend (hosting estatico): abre el correo del visitante con el mensaje listo. */
+  function mailtoFallback(d){
+    var isEn = (window.__lang||'es')==='en';
+    var subject = encodeURIComponent((isEn?'Contact from the site — ':'Contacto desde el sitio — ')+d.name);
+    var body = encodeURIComponent(d.message+'\n\n'+d.name+'\n'+d.email);
+    window.location.href = 'mailto:hola@robertoleono.com?subject='+subject+'&body='+body;
+    msg.className='fmsg ok';
+    msg.textContent = isEn
+      ? 'Opening your email app with the message ready — just hit send.'
+      : 'Abriendo tu correo con el mensaje listo — solo dale enviar.';
+  }
+  f.addEventListener('submit', async function(e){
+    e.preventDefault(); msg.className='fmsg'; msg.textContent='';
+    var data={name:f.name.value.trim(), email:f.email.value.trim(), message:f.message.value.trim()};
+    if(!data.name||!data.email||!data.message){ msg.className='fmsg err'; msg.textContent=tl('fill'); return; }
+    btn.disabled=true; btn.textContent=tl('sending');
+    try{
+      var r=await fetch('/contact-api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+      var j=await r.json().catch(function(){return {};});
+      if(r.ok && j.ok){ msg.className='fmsg ok'; msg.textContent=tl('ok'); f.reset(); }
+      else { mailtoFallback(data); }
+    }catch(err){ mailtoFallback(data); }
+    btn.disabled=false; btn.textContent=tl('send');
+  });
+</script>
+</body>
+</html>
